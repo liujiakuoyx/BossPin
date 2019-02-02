@@ -1,5 +1,6 @@
 package com.liujiakuo.boss;
 
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -13,6 +14,7 @@ import com.liujiakuo.boss.base.BaseFragmentDialog;
 import com.liujiakuo.boss.dialog.BossNotifyDialog;
 
 public class MainActivity extends BaseActivity {
+    private Handler handler = new Handler();
 
     @Override
     public int getContentLayoutId() {
@@ -22,13 +24,27 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BossNotifyDialog.Builder builder = new BossNotifyDialog.Builder(this);
-        BossNotifyDialog dialog = builder
-                .setCancelable(false)
-                .setCanBackEvent(false)
-                .setTitle("HHHHHH")
-                .setMessage("hhhhhhhhhhhhhhhhhhh")
-                .build();
-        dialog.show(getSupportFragmentManager(), "1");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        showProgressDialog();
+                    }
+                });
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismissProgressDialog();
+                    }
+                });
+            }
+        }).start();
     }
 }
