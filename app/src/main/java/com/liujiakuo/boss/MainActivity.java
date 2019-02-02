@@ -28,18 +28,7 @@ public class MainActivity extends BaseActivity {
                 .setCanBackEvent(false)
                 .setTitle("HHHHHH")
                 .setMessage("hhhhhhhhhhhhhhhhhhh")
-                .setNegativeButton("111", new BossNotifyDialog.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "111", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setPositiveButton("222", new BossNotifyDialog.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "222", Toast.LENGTH_SHORT).show();
-                    }
-                }).build();
+                .build();
         dialog.show(getSupportFragmentManager(), "1");
     }
 }

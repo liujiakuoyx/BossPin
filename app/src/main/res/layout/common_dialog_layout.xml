@@ -37,13 +37,13 @@
         android:orientation="horizontal">
 
         <FrameLayout
-            android:id="@+id/common_dialog_negative_container"
+            android:id="@+id/common_dialog_positive_container"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/common_dialog_negative_text"
+                android:id="@+id/common_dialog_positive_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -58,13 +58,13 @@
             android:background="#BBBBBB" />
 
         <FrameLayout
-            android:id="@+id/common_dialog_positive_container"
+            android:id="@+id/common_dialog_negative_container"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/common_dialog_positive_text"
+                android:id="@+id/common_dialog_negative_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

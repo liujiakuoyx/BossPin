@@ -81,8 +81,8 @@ public class BossNotifyDialog extends BaseFragmentDialog {
                 public void onClick(View v) {
                     if (mNegativeListener != null) {
                         mNegativeListener.onClick(v);
-                        dismiss();
                     }
+                    dismiss();
                 }
             });
 
@@ -90,7 +90,7 @@ public class BossNotifyDialog extends BaseFragmentDialog {
         if (TextUtils.isEmpty(mPositiveText)) {
             ViewUtils.setViewGone(view.findViewById(R.id.common_dialog_positive_container));
         } else {
-            ViewUtils.setViewVisible(view.findViewById(R.id.common_dialog_negative_container));
+            ViewUtils.setViewVisible(view.findViewById(R.id.common_dialog_positive_container));
             TextView positive = view.findViewById(R.id.common_dialog_positive_text);
             View positiveContainer = view.findViewById(R.id.common_dialog_positive_container);
             positive.setText(mPositiveText);
@@ -99,8 +99,8 @@ public class BossNotifyDialog extends BaseFragmentDialog {
                 public void onClick(View v) {
                     if (mPositiveListener != null) {
                         mPositiveListener.onClick(v);
-                        dismiss();
                     }
+                    dismiss();
                 }
             });
         }
