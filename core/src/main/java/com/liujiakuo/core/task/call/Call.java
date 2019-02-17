@@ -7,9 +7,9 @@ package com.liujiakuo.core.task.call;
  */
 
 public interface Call<T> extends Cloneable{
-    void execute();
+    T execute();
 
-    void enqueue();
+    T enqueue();
 
     void cancel();
 }

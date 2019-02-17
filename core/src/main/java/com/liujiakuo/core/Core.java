@@ -1,4 +1,4 @@
-package com.liujiakuo.core.task;
+package com.liujiakuo.core;
 
 import android.support.annotation.NonNull;
 
@@ -12,12 +12,17 @@ import com.liujiakuo.core.task.call.TaskCall;
 public class Core {
     private static Task task;
 
+
     //拿到task
     public synchronized static Task task() {
         if (task == null) {
             task = new Task();
         }
         return task;
+    }
+
+    public synchronized static void http(){
+
     }
 
     /**

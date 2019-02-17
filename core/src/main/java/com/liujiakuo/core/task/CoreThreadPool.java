@@ -23,7 +23,7 @@ public class CoreThreadPool {
         return mThreadPoolExecutor;
     }
 
-    public static synchronized void enqueue(Runnable r) {
+    public static synchronized void execute(Runnable r) {
         if (r == null) {
             return;
         }

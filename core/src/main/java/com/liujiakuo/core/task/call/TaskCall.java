@@ -18,20 +18,30 @@ public class TaskCall implements Call<Void> {
     }
 
     @Override
-    public void execute() {
-        if (mRunnable == null) return;
+    public Void execute() {
+        if (mCanceled || mExecuted || mRunnable == null) {
+            return null;
+        }
+        //同步执行
         mRunnable.run();
+        mExecuted = true;
+        return null;
     }
 
     @Override
-    public void enqueue() {
-        if (mRunnable == null) return;
-        CoreThreadPool.enqueue(mRunnable);
+    public Void enqueue() {
+        if (mCanceled || mExecuted || mRunnable == null) {
+            return null;
+        }
+        //交给线程池执行
+        CoreThreadPool.execute(mRunnable);
+        return null;
     }
 
     @Override
     public void cancel() {
-        mCanceled = true;
+        if (!mCanceled)
+            mCanceled = true;
     }
 
 }
