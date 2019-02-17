@@ -3,9 +3,12 @@ package com.liujiakuo.core.http;
 import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,16 +25,13 @@ import okhttp3.logging.HttpLoggingInterceptor;
 public class HttpClient {
     private static OkHttpClient client;
     private static Context mApplicationContext;
-    public static String mBaseUrl;
+    private static final Handler MH = new Handler(Looper.getMainLooper());
 
     /**
      * 需要在Application初始化
-     *
-     * @param baseUrl host
      */
-    public static void initOkHttp(Application application, String baseUrl) {
+    public static void initOkHttp(Application application) {
         mApplicationContext = application;
-        mBaseUrl = baseUrl;
         if (client == null) {
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -47,38 +47,71 @@ public class HttpClient {
         return client;
     }
 
-    public static void addRequest(final CommonRequest request) {
+    /**
+     * 添加一个网络请求
+     *
+     * @param request
+     */
+    public static boolean addRequest(final CommonRequest request) {
+        //防止引用
+        final WeakReference<CommonRequest> reference = new WeakReference<>(request);
         if (client == null || request == null) {
-            return;
+            return false;
         }
         if (!checkNetwork(mApplicationContext)) {
             //网络异常
             Toast.makeText(mApplicationContext, "网络没有连接", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
         client.newCall(request.getRequest()).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                CommonRequest.NetCallBack netClassBack = request.getNetClassBack();
+            public void onFailure(Call call, final IOException e) {
+                CommonRequest commonRequest = reference.get();
+                if (commonRequest == null) {
+                    return;
+                }
+                final CommonRequest.NetCallBack netClassBack = commonRequest.getNetClassBack();
                 if (netClassBack != null) {
-                    netClassBack.onFailure(e);
+                    //调度到主线程
+                    MH.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            netClassBack.onFailure(e);
+                        }
+                    });
                 }
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                IParseNetwork parseNetwork = request.getParseNetwork();
-                CommonRequest.NetCallBack netClassBack = request.getNetClassBack();
+            public void onResponse(Call call, final Response response) throws IOException {
+                CommonRequest commonRequest = reference.get();
+                if (commonRequest == null) {
+                    return;
+                }
+                final IParseNetwork parseNetwork = commonRequest.getParseNetwork();
+                final CommonRequest.NetCallBack netClassBack = commonRequest.getNetClassBack();
                 if (netClassBack != null) {
-                    if (parseNetwork == null) {
-                        netClassBack.onResponse(null);
-                    } else {
-                        //得到数据
-                        netClassBack.onResponse(parseNetwork.parseNetworkResponse(response.body().string()));
-                    }
+                    //调到主线程
+                    MH.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (parseNetwork == null) {
+                                netClassBack.onResponse(null);
+                            } else {
+                                //得到数据
+                                try {
+                                    netClassBack.onResponse(parseNetwork.parseNetworkResponse(response.body().string()));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                    netClassBack.onFailure(e);
+                                }
+                            }
+                        }
+                    });
                 }
             }
         });
+        return true;
     }
 
     /**

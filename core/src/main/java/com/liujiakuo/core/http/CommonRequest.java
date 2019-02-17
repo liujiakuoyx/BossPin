@@ -5,36 +5,21 @@ import android.support.annotation.NonNull;
 
 import java.io.IOException;
 
+import okhttp3.FormBody;
 import okhttp3.Request;
 
 /**
  * Created by 佳阔 on 2019/2/17.
+ * 负责管理数据解析和回调
  */
 
 public class CommonRequest<T> {
     private Request request;
-    private String url;//请求路径
     private IParseNetwork<T> mParseNetwork;
     private NetCallBack<T> mNetCallBack;
 
-    public CommonRequest(String path) {
-        this(path, null);
-    }
-
-    public CommonRequest(String host, String path, Object tag) {
-        url = host + path;
-        request = new Request.Builder()
-                .url(host + path)//拼接host：path
-                .tag(tag)
-                .build();
-    }
-
-    public CommonRequest(String path, Object tag) {
-        url = HttpClient.mBaseUrl + path;
-        request = new Request.Builder()
-                .url(HttpClient.mBaseUrl + path)//拼接host：path
-                .tag(tag)
-                .build();
+    public CommonRequest(Request request) {
+        this.request = request;
     }
 
     public CommonRequest<T> setNetCallBack(@NonNull NetCallBack<T> callBack) {
@@ -55,10 +40,6 @@ public class CommonRequest<T> {
         return mParseNetwork;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
     public Request getRequest() {
         return request;
     }
@@ -67,7 +48,7 @@ public class CommonRequest<T> {
     public interface NetCallBack<T> {
         void onFailure(Exception e);
 
-        void onResponse(T response) throws IOException;
+        void onResponse(T response);
     }
 
 

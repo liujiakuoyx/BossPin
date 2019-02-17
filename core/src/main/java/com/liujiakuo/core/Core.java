@@ -21,10 +21,6 @@ public class Core {
         return task;
     }
 
-    public synchronized static void http(){
-
-    }
-
     /**
      * 负责异步线程等任务执行，现在只有一个方法
      */

@@ -10,7 +10,6 @@ import com.liujiakuo.core.task.CoreThreadPool;
  */
 
 public class MyApplication extends MultiDexApplication {
-    private final String BASE_URL = "http://localhost:8080";
 
     @Override
     public void onCreate() {
@@ -18,6 +17,6 @@ public class MyApplication extends MultiDexApplication {
         //初始化线程池
         CoreThreadPool.initThreadPool();
         //初始化okHttp
-        HttpClient.initOkHttp(this, BASE_URL);
+        HttpClient.initOkHttp(this);
     }
 }
