@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
-    private List<T> mData = new ArrayList<T>();
+    protected List<T> mData = new ArrayList<T>();
 
     public List<T> getData() {
         //使用unmodifiablelist，避免外界获取到data的引用对数据做更改
@@ -58,7 +58,6 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
             }
 
         }
-
     }
 
     public int getBasicItemCount() {

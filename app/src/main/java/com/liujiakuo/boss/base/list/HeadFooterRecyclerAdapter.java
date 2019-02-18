@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 
 import com.liujiakuo.boss.holder.RecyclerViewItemType;
 
+import java.util.List;
+
 /**
  * Created by 佳阔 on 2019/2/17.
  * 带头部尾部的adapter
@@ -138,6 +140,18 @@ public abstract class HeadFooterRecyclerAdapter<T, HD, FD> extends BaseRecyclerV
     }
 
     /**
+     * 获取显示头部时的item的position
+     * basicPos列表item位置
+     * 返回在列表的真实位置
+     */
+    public int getActualPosition(int basicPos) {
+        if (showHeader()) {
+            return basicPos + 1;
+        }
+        return basicPos;
+    }
+
+    /**
      * 获取添加了头部尾部的列表大小
      */
     @Override
@@ -179,6 +193,32 @@ public abstract class HeadFooterRecyclerAdapter<T, HD, FD> extends BaseRecyclerV
         }
         T basicItem = getBasicItem(getBasicPosition(position));
         return getBasicItemType(basicItem);
+    }
+
+    /**
+     * 通知列表刷新
+     *
+     * @param items   新数据
+     * @param refresh 是否是下拉刷新，下拉刷新清除原来的数据
+     */
+    public void updateDataNotifyItem(List<T> items, boolean refresh) {
+        if (items == null || items.isEmpty()) {
+            return;
+        }
+        if (refresh) {
+            mData.clear();
+        }
+        int origCount = getBasicItemCount();
+        mData.addAll(items);
+        if (refresh) {
+            notifyDataSetChanged();
+        } else {
+            if (items != null && !items.isEmpty()) {
+                //上拉加载更多，添加尾部数据
+                notifyItemRangeInserted(getActualPosition(origCount), items.size());
+            }
+
+        }
     }
 
     /**
