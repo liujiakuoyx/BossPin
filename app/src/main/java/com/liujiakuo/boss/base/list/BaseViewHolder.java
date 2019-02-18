@@ -31,8 +31,8 @@ public abstract class BaseViewHolder<D> extends RecyclerView.ViewHolder {
         mItemData = itemData;
     }
 
-    public View getView(int id) {
-        View view = itemView.findViewById(id);
+    public <T extends View> T getView(int id) {
+        T view = itemView.findViewById(id);
         return view;
     }
 

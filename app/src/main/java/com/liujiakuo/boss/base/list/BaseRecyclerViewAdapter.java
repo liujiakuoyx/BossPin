@@ -41,6 +41,9 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
      * @param refresh 是否是下拉刷新，下拉刷新清除原来的数据
      */
     public void updateDataNotifyItem(List<T> items, boolean refresh) {
+        if (items == null || items.isEmpty()) {
+            return;
+        }
         if (refresh) {
             mData.clear();
         }

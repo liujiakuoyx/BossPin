@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +22,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 
 public class HttpClient {
+    private static final String TAG = "HttpClient";
     private static OkHttpClient client;
     private static Context mApplicationContext;
     private static final Handler MH = new Handler(Looper.getMainLooper());
@@ -53,24 +53,21 @@ public class HttpClient {
      * @param request
      */
     public static boolean addRequest(final CommonRequest request) {
-        //防止引用
-        final WeakReference<CommonRequest> reference = new WeakReference<>(request);
         if (client == null || request == null) {
             return false;
         }
         if (!checkNetwork(mApplicationContext)) {
-            //网络异常
-            Toast.makeText(mApplicationContext, "网络没有连接", Toast.LENGTH_SHORT).show();
+            //网络没有连接
+            CommonRequest.NetCallBack netCallBack = request.getNetCallBack();
+            if (netCallBack != null) {
+                netCallBack.onFailure(new Exception("没有网络连接"));
+            }
             return false;
         }
         client.newCall(request.getRequest()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
-                CommonRequest commonRequest = reference.get();
-                if (commonRequest == null) {
-                    return;
-                }
-                final CommonRequest.NetCallBack netClassBack = commonRequest.getNetClassBack();
+                final CommonRequest.NetCallBack netClassBack = request.getNetCallBack();
                 if (netClassBack != null) {
                     //调度到主线程
                     MH.post(new Runnable() {
@@ -84,12 +81,8 @@ public class HttpClient {
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                CommonRequest commonRequest = reference.get();
-                if (commonRequest == null) {
-                    return;
-                }
-                final IParseNetwork parseNetwork = commonRequest.getParseNetwork();
-                final CommonRequest.NetCallBack netClassBack = commonRequest.getNetClassBack();
+                final IParseNetwork parseNetwork = request.getParseNetwork();
+                final CommonRequest.NetCallBack netClassBack = request.getNetCallBack();
                 if (netClassBack != null) {
                     //调到主线程
                     MH.post(new Runnable() {

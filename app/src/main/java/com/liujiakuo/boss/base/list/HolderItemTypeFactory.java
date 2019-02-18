@@ -2,7 +2,8 @@ package com.liujiakuo.boss.base.list;
 
 import android.view.ViewGroup;
 
-import com.liujiakuo.boss.holder.JobHolder;
+import com.liujiakuo.boss.R;
+import com.liujiakuo.boss.holder.PositionHolder;
 import com.liujiakuo.boss.holder.RecyclerViewItemType;
 import com.liujiakuo.boss.utils.TextUtils;
 
@@ -26,14 +27,6 @@ public class HolderItemTypeFactory {
         if (TextUtils.isEmpty(dataType)) {
             return 0;
         }
-        if (DATA_TYPE_JOB.equals(dataType)) {
-            //职位列表
-            return RecyclerViewItemType.ITEM_TYPE_JOB;
-
-        } else if (DATA_TYPE_COMPANY.equals(dataType)) {
-            //公司列表
-            return RecyclerViewItemType.ITEM_TYPE_COMPANY;
-        }
         return 0;
     }
 
@@ -44,7 +37,8 @@ public class HolderItemTypeFactory {
         BaseViewHolder viewHolder = null;
         switch (type) {
             case RecyclerViewItemType.ITEM_TYPE_JOB:
-                viewHolder = new JobHolder(0, parent);//todo补全这个layoutId
+                //工作列表holder
+                viewHolder = new PositionHolder(R.layout.biz_item_position_holder, parent);
                 break;
             case RecyclerViewItemType.ITEM_TYPE_COMPANY:
                 break;

@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Bundle;
 
 import com.liujiakuo.boss.base.activity.BaseActivity;
-import com.liujiakuo.boss.base.fragment.TestFragment;
+import com.liujiakuo.boss.biz.position.PositionListFragment;
 
 public class MainActivity extends BaseActivity {
     private Handler handler = new Handler();
@@ -17,7 +17,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TestFragment testFragment = new TestFragment();
+        PositionListFragment testFragment = new PositionListFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.content_layout, testFragment, "tag").commitAllowingStateLoss();
     }
 }

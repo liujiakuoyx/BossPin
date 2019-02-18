@@ -1,7 +1,12 @@
 package com.liujiakuo.boss.base.fragment;
 
+import android.util.Log;
+
+import com.google.gson.reflect.TypeToken;
+import com.liujiakuo.boss.utils.JsonUtils;
 import com.liujiakuo.core.http.CommonRequest;
 import com.liujiakuo.core.http.HttpClient;
+import com.liujiakuo.core.http.IParseNetwork;
 
 /**
  * Created by 佳阔 on 2019/2/17.

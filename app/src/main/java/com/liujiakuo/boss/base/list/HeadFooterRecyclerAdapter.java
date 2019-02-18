@@ -1,5 +1,6 @@
 package com.liujiakuo.boss.base.list;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.liujiakuo.boss.holder.RecyclerViewItemType;
@@ -17,23 +18,26 @@ public abstract class HeadFooterRecyclerAdapter<T, HD, FD> extends BaseRecyclerV
     private FD mFooterHolderData;
     private BaseViewHolder<HD> mHeadHolder;
     private BaseViewHolder<FD> mFooterHolder;
+    private OnItemBindListener mItemBindListener;
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == RecyclerViewItemType.HEAD) {
-            mHeadHolder = createHeadViewHolder(parent, viewType);
+            if (mHeadHolder == null) {
+                mHeadHolder = createHeadViewHolder(parent, viewType);
+            }
             return mHeadHolder;
         } else if (viewType == RecyclerViewItemType.FOOTER) {
             mFooterHolder = createFooterViewHolder(parent, viewType);
             return mFooterHolder;
         } else {
-            BaseViewHolder viewHolder = createBasicViewHolser(parent, viewType);
+            BaseViewHolder viewHolder = createBasicViewHolder(parent, viewType);
             return viewHolder;
         }
     }
 
     //创建item
-    protected abstract BaseViewHolder createBasicViewHolser(ViewGroup parent, int viewType);
+    protected abstract BaseViewHolder createBasicViewHolder(ViewGroup parent, int viewType);
 
     //创建尾部
     protected abstract BaseViewHolder<FD> createFooterViewHolder(ViewGroup parent, int viewType);
@@ -52,17 +56,34 @@ public abstract class HeadFooterRecyclerAdapter<T, HD, FD> extends BaseRecyclerV
             if (mHeadHolder != null) {
                 mHeadHolder.bindView(mHeadHolderData);
             }
+            if (mItemBindListener != null) {
+                mItemBindListener.bindHead(holder);
+            }
         } else if (itemViewType == RecyclerViewItemType.FOOTER) {
             //bind footer holder
             if (mFooterHolder != null) {
                 mFooterHolder.bindView(mFooterHolderData);
             }
+            if (mItemBindListener != null) {
+                mItemBindListener.bindFooter(holder);
+            }
         } else {
             //拿到item绝对位置(除去头部)
             int basicPosition = getBasicPosition(position);
             holder.bindView(getBasicItem(basicPosition), basicPosition);
+            if (mItemBindListener != null) {
+                mItemBindListener.bindBasicItem(holder, getBasicPosition(position));
+            }
         }
 
+    }
+
+    public FD getFooterData() {
+        return mFooterHolderData;
+    }
+
+    public HD getHeadData() {
+        return mHeadHolderData;
     }
 
     /**
@@ -78,6 +99,10 @@ public abstract class HeadFooterRecyclerAdapter<T, HD, FD> extends BaseRecyclerV
             //头部添加或者移除需要更新列表数据
             notifyDataSetChanged();
         }
+    }
+
+    public void setOnItemBindListener(@NonNull OnItemBindListener listener) {
+        mItemBindListener = listener;
     }
 
     /**
@@ -161,4 +186,12 @@ public abstract class HeadFooterRecyclerAdapter<T, HD, FD> extends BaseRecyclerV
      * 需要子类继承
      */
     public abstract int getBasicItemType(T basicItem);
+
+    public interface OnItemBindListener<HD, T, FD> {
+        void bindHead(BaseViewHolder<HD> holder);
+
+        void bindBasicItem(BaseViewHolder<T> holder, int position);
+
+        void bindFooter(BaseViewHolder<FD> holder);
+    }
 }

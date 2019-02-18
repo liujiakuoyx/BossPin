@@ -11,7 +11,9 @@ import okhttp3.Request;
  */
 
 public class RequestDefine {
-    private static final String BASE_URL = "http://localhost:8080/";
+    private static final String BASE_URL = "http://10.236.128.218:8080/";
+    private static final String JOB_URL = BASE_URL + "job/";
+    private static final String GET_POSITION_URL = JOB_URL + "getJobList";
 
     /**
      * 获取工作列表
@@ -27,8 +29,7 @@ public class RequestDefine {
                 .add("page", String.valueOf(page))
                 .build();
         Request request = new Request.Builder()
-//                .url(BASE_URL + "getJobList")
-                .url("http://www.baidu.com")
+                .url(GET_POSITION_URL)
                 .tag(fragment)
                 .post(body)
                 .build();

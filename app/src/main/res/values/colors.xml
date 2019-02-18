@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <!--进度条颜色-->
+    <color name="progress_color_1">#85fdfb</color>
+    <color name="progress_color_2">#75b0f7</color>
+    <color name="progress_color_3">#7972f7</color>
 </resources>
