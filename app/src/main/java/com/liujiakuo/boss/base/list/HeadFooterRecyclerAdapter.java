@@ -30,7 +30,9 @@ public abstract class HeadFooterRecyclerAdapter<T, HD, FD> extends BaseRecyclerV
             }
             return mHeadHolder;
         } else if (viewType == RecyclerViewItemType.FOOTER) {
-            mFooterHolder = createFooterViewHolder(parent, viewType);
+            if (mFooterHolder == null) {
+                mFooterHolder = createFooterViewHolder(parent, viewType);
+            }
             return mFooterHolder;
         } else {
             BaseViewHolder viewHolder = createBasicViewHolder(parent, viewType);

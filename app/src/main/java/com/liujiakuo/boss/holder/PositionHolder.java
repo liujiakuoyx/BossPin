@@ -18,11 +18,22 @@ public class PositionHolder extends BaseViewHolder<PositionBean> {
     @Override
     public void bindView(PositionBean itemData) {
         super.bindView(itemData);
-        TextView jName = getView(R.id.job_name);
-        TextView cName = getView(R.id.c_name);
-        TextView uName = getView(R.id.u_name);
-        jName.setText(itemData.getName());
-        cName.setText(itemData.getCompany().getName() + "");
-        uName.setText(itemData.getUser().getNick() + "");
+        TextView positionName = getView(R.id.position_name);
+        TextView positionLocation = getView(R.id.position_location);
+        TextView positionCompanyName = getView(R.id.position_company_name);
+        TextView positionCompanyStage = getView(R.id.position_company_stage);
+        TextView positionEducation = getView(R.id.position_education);
+        TextView positionSalary = getView(R.id.position_salary);
+        TextView positionWorkYears = getView(R.id.position_work_years);
+
+        positionName.setText(itemData.getName());
+        positionLocation.setText(itemData.getLocation());
+        if (itemData.getCompany() != null) {
+            positionCompanyName.setText(itemData.getCompany().getName());
+            positionCompanyStage.setText(itemData.getCompany().getStage());
+        }
+        positionSalary.setText(itemData.getSalary());
+        positionWorkYears.setText(itemData.getWorkYears());
+        positionEducation.setText(itemData.getEducation());
     }
 }

@@ -1,10 +1,10 @@
 package com.liujiakuo.boss.base.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +17,7 @@ import com.liujiakuo.boss.base.http.response.PageDataResponse;
 import com.liujiakuo.boss.base.list.BaseFooterHolder;
 import com.liujiakuo.boss.base.list.BasePageListAdapter;
 import com.liujiakuo.boss.base.list.BaseViewHolder;
+import com.liujiakuo.boss.base.list.CommonItemDecoration;
 import com.liujiakuo.boss.base.list.HeadFooterRecyclerAdapter;
 import com.liujiakuo.core.http.CommonRequest;
 import com.liujiakuo.core.http.HttpClient;
@@ -56,8 +57,13 @@ public abstract class BaseListFragment<T, D extends PageDataResponse, HD> extend
         mRefreshLayout.setOnRefreshListener(this);
 
         mRecyclerView = view.findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);//item改变不重新计算大小
-        mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);//去掉边缘的光晕效果
+        //item改变不重新计算大小
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //分割线
+        mRecyclerView.addItemDecoration(CommonItemDecoration.createVertical(getContext(), Color.parseColor("#f2f2f2"), 9));
+        //去掉边缘的光晕效果
+        mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mLoadManager = new LoadManager<>(this, this);
         initAdapter();
         //首次进入加载数据
@@ -82,8 +88,6 @@ public abstract class BaseListFragment<T, D extends PageDataResponse, HD> extend
         mAdapter = createAdapter();
         if (mAdapter != null) {
             //初始化Recycler
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.setOnItemBindListener(this);
             mAdapter.notifyDataSetChanged();
@@ -243,6 +247,7 @@ public abstract class BaseListFragment<T, D extends PageDataResponse, HD> extend
 
     @Override
     public void bindFooter(BaseViewHolder<Integer> holder) {
+        Log.d(TAG, "bindFooter: " + holder.hashCode());
         if (mRecyclerView != null) {
             mRecyclerView.post(new Runnable() {
                 @Override

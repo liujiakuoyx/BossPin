@@ -10,10 +10,16 @@ import com.liujiakuo.core.task.CoreThreadPool;
  */
 
 public class MyApplication extends MultiDexApplication {
+    private static MyApplication instance;
+
+    public static MyApplication getInstance() {
+        return instance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         //初始化线程池
         CoreThreadPool.initThreadPool();
         //初始化okHttp
