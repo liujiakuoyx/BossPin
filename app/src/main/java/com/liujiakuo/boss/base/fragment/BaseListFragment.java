@@ -19,6 +19,7 @@ import com.liujiakuo.boss.base.list.BasePageListAdapter;
 import com.liujiakuo.boss.base.list.BaseViewHolder;
 import com.liujiakuo.boss.base.list.CommonItemDecoration;
 import com.liujiakuo.boss.base.list.HeadFooterRecyclerAdapter;
+import com.liujiakuo.boss.base.list.RecyclerItemClickListener;
 import com.liujiakuo.core.http.CommonRequest;
 import com.liujiakuo.core.http.HttpClient;
 
@@ -64,11 +65,25 @@ public abstract class BaseListFragment<T, D extends PageDataResponse, HD> extend
         mRecyclerView.addItemDecoration(CommonItemDecoration.createVertical(getContext(), Color.parseColor("#f2f2f2"), 9));
         //去掉边缘的光晕效果
         mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        //添加item点击事件
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mRecyclerView) {
+            @Override
+            public void onItemClick(BaseViewHolder holder) {
+                BaseListFragment.this.onItemClick(holder);
+            }
+
+            @Override
+            public void onItemLongClick(BaseViewHolder holder) {
+
+            }
+        });
         mLoadManager = new LoadManager<>(this, this);
         initAdapter();
         //首次进入加载数据
         loadFirstData();
     }
+
+    protected abstract void onItemClick(BaseViewHolder holder);
 
     private void loadFirstData() {
         if (shouldLoadDataForFirstTime()) {
