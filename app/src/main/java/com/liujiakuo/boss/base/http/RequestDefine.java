@@ -11,7 +11,7 @@ import okhttp3.Request;
  */
 
 public class RequestDefine {
-    private static final String BASE_URL = "http://10.236.128.218:8080/";
+    private static final String BASE_URL = "http://123.206.41.242:8080/boss/";
     private static final String JOB_URL = BASE_URL + "job/";
     private static final String GET_POSITION_URL = JOB_URL + "getJobList";
 
