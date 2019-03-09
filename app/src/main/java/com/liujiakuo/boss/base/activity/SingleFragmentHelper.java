@@ -21,6 +21,7 @@ public class SingleFragmentHelper {
     public static void startSingleFragment(Context context, String fragmentName, String fragmentTag, Bundle bundle) {
         Intent intent = new Intent(context, SingleFragmentActivity.class);
         putSingleBundle(bundle, intent, fragmentName, fragmentTag);
+        context.startActivity(intent);
     }
 
     private static void putSingleBundle(Bundle bundle, Intent intent, String fragmentName, String fragmentTag) {

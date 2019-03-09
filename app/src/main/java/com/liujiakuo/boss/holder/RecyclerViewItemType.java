@@ -8,7 +8,7 @@ public class RecyclerViewItemType {
     /**
      * 转换后的itemType
      */
-    public static final int DEFAULT = 0;//头部
+    public static final int DEFAULT = 0;
 
     public static final int HEAD = 1;//头部
     public static final int FOOTER = 2;//尾部

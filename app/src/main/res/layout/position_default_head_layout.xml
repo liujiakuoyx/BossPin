@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/common_list_padding">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/position_default_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/position_default_salary"
+            android:text="Android开发工程师开"
+            android:textColor="#000000"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/position_default_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="9dp"
+            android:text="20K-40K"
+            android:textColor="#2aa8a6"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/position_default_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="北京·太和宫"
+            android:textColor="#030303" />
+
+        <TextView
+            android:id="@+id/position_default_work_years"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="1-3年"
+            android:textColor="#030303" />
+
+        <TextView
+            android:id="@+id/position_default_education"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本科"
+            android:textColor="#030303" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -14,6 +14,10 @@ import java.io.Serializable;
  */
 public class PositionBean implements Serializable {
     /**
+     * id
+     */
+    private String pid;
+    /**
      * 工作名称
      */
     private String name;
@@ -118,5 +122,11 @@ public class PositionBean implements Serializable {
         this.company = company;
     }
 
+    public String getPid() {
+        return pid;
+    }
 
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 }
