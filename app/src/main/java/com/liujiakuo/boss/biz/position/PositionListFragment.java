@@ -1,7 +1,6 @@
 package com.liujiakuo.boss.biz.position;
 
 
-import android.os.Build;
 import android.os.Bundle;
 
 import com.google.gson.reflect.TypeToken;

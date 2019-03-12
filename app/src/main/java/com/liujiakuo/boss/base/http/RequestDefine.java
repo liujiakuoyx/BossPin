@@ -15,8 +15,10 @@ import okhttp3.RequestBody;
 public class RequestDefine {
     private static final String BASE_URL = "http://123.206.41.242:8080/boss/";
     private static final String JOB_URL = BASE_URL + "job/";
+    private static final String USER_URL = BASE_URL + "user/";
     private static final String GET_POSITION_URL = JOB_URL + "getJobList";
     private static final String GET_POSITION_DEFAULT_URL = JOB_URL + "jobDetail";
+    private static final String LOGIN_URL = USER_URL + "login";
 
     /**
      * 获取工作列表
@@ -42,8 +44,8 @@ public class RequestDefine {
     /**
      * 获取职位详细信息
      */
-    public static Request getPositionDefault(BaseFragment fragment, String posId){
-        if(TextUtils.isEmpty(posId)){
+    public static Request getPositionDefault(BaseFragment fragment, String posId) {
+        if (TextUtils.isEmpty(posId)) {
             return null;
         }
         FormBody body = new FormBody.Builder()
@@ -51,6 +53,22 @@ public class RequestDefine {
                 .build();
         Request request = new Request.Builder()
                 .url(GET_POSITION_DEFAULT_URL)
+                .tag(fragment)
+                .post(body)
+                .build();
+        return request;
+    }
+
+    /**
+     * 登录
+     */
+    public static Request getLoginRequest(BaseFragment fragment, String name, String pass) {
+        FormBody body = new FormBody.Builder()
+                .add("key", name)
+                .add("pass", pass)
+                .build();
+        Request request = new Request.Builder()
+                .url(LOGIN_URL)
                 .tag(fragment)
                 .post(body)
                 .build();

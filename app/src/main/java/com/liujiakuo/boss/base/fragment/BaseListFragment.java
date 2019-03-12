@@ -147,13 +147,6 @@ public abstract class BaseListFragment<T, D extends PageDataResponse, HD> extend
         return true;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //关闭没有完成的网络请求，防止内存溢出
-        HttpClient.cancelByTag(this);
-    }
-
     /**
      * 加载缓存数据,需要子类实现
      */

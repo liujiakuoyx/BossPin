@@ -7,4 +7,6 @@
     <color name="progress_color_1">#85fdfb</color>
     <color name="progress_color_2">#75b0f7</color>
     <color name="progress_color_3">#7972f7</color>
+    <color name="selected_text_color">#1296db</color>
+    <color name="not_selected_text_color">#707070</color>
 </resources>

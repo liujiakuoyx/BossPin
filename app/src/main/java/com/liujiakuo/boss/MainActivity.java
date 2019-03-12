@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Bundle;
 
 import com.liujiakuo.boss.base.activity.BaseActivity;
+import com.liujiakuo.boss.biz.ViewPageFragment;
 import com.liujiakuo.boss.biz.position.PositionListFragment;
 
 public class MainActivity extends BaseActivity {
@@ -17,7 +18,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PositionListFragment testFragment = new PositionListFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.content_layout, testFragment, "tag").commitAllowingStateLoss();
+        ViewPageFragment mainFragment = new ViewPageFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.content_layout,
+                mainFragment, "ViewPageFragment").commitAllowingStateLoss();
     }
 }

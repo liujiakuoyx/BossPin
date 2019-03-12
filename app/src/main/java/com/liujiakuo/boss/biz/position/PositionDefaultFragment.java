@@ -8,11 +8,14 @@ import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.liujiakuo.boss.R;
+import com.liujiakuo.boss.base.activity.SingleFragmentHelper;
 import com.liujiakuo.boss.base.fragment.BaseRequestFragment;
 import com.liujiakuo.boss.base.http.RequestDefine;
 import com.liujiakuo.boss.base.http.response.DataResponse;
 import com.liujiakuo.boss.biz.company.CompanyInfo;
+import com.liujiakuo.boss.biz.login.LoginFragment;
 import com.liujiakuo.boss.biz.user.UserInfo;
+import com.liujiakuo.boss.config.ConfigData;
 import com.liujiakuo.boss.utils.ImageUtils;
 import com.liujiakuo.boss.utils.JsonUtils;
 import com.liujiakuo.core.http.CommonRequest;
@@ -95,6 +98,25 @@ public class PositionDefaultFragment extends BaseRequestFragment<DataResponse<Po
         mCompanyHead = view.findViewById(R.id.position_default_company_head);
         TextView topBarTitle = view.findViewById(R.id.top_bar_title);
         topBarTitle.setText("职位信息");
+        view.findViewById(R.id.post_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doPost();
+            }
+        });
+    }
+
+    /**
+     * 发送简历
+     */
+    private void doPost() {
+        if (ConfigData.isLogin()) {
+            //发送个人简历
+        } else {
+            //登录
+            SingleFragmentHelper.startSingleFragment(getContext(), LoginFragment.class.getName(),
+                    LoginFragment.class.getSimpleName(), new Bundle());
+        }
     }
 
 

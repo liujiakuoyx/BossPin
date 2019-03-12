@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.liujiakuo.boss.base.activity.BaseActivity;
+import com.liujiakuo.core.http.HttpClient;
 
 /**
  * Created by 佳阔 on 2019/2/1.
@@ -40,5 +41,12 @@ public abstract class BaseFragment extends Fragment {
             return (BaseActivity) activity;
         }
         return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //关闭没有完成的网络请求，防止内存溢出
+        HttpClient.cancelByTag(this);
     }
 }

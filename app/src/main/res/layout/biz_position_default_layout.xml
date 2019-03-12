@@ -1,21 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/common_title_bar" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_above="@+id/button_frame"
+        android:layout_below="@+id/top_bar">
 
-        <include layout="@layout/common_title_bar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <include layout="@layout/position_default_head_layout" />
+            <include layout="@layout/position_default_head_layout" />
 
-        <include layout="@layout/position_default_user_info_layout" />
+            <include layout="@layout/position_default_user_info_layout" />
 
-        <include layout="@layout/position_default_position_info_layout" />
+            <include layout="@layout/position_default_position_info_layout" />
 
-        <include layout="@layout/position_default_company_layout" />
-    </LinearLayout>
-</ScrollView>
+            <include layout="@layout/position_default_company_layout" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/button_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp">
+
+        <Button
+            android:id="@+id/post_button"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/login_button_back"
+            android:text="投递简历"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+    </FrameLayout>
+
+</RelativeLayout>
