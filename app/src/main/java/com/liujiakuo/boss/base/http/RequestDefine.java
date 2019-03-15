@@ -4,6 +4,7 @@ import com.liujiakuo.boss.base.BaseFragment;
 import com.liujiakuo.boss.utils.TextUtils;
 
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
@@ -13,12 +14,13 @@ import okhttp3.RequestBody;
  */
 
 public class RequestDefine {
-    private static final String BASE_URL = "http://123.206.41.242:8080/boss/";
+    private static final String BASE_URL = "http://10.100.0.246:8080/";
     private static final String JOB_URL = BASE_URL + "job/";
     private static final String USER_URL = BASE_URL + "user/";
     private static final String GET_POSITION_URL = JOB_URL + "getJobList";
     private static final String GET_POSITION_DEFAULT_URL = JOB_URL + "jobDetail";
     private static final String LOGIN_URL = USER_URL + "login";
+    private static final String REGISTER_URL = USER_URL + "register";
 
     /**
      * 获取工作列表
@@ -70,6 +72,22 @@ public class RequestDefine {
         Request request = new Request.Builder()
                 .url(LOGIN_URL)
                 .tag(fragment)
+                .post(body)
+                .build();
+        return request;
+    }
+
+    /**
+     * 注册
+     */
+    public static Request getRegisterRequest(String json) {
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(REGISTER_URL)
                 .post(body)
                 .build();
         return request;

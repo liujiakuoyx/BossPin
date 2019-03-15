@@ -31,3 +31,5 @@ proguard/
 *.iml
 .idea
 *.DS_Store
+
+-dontwarn com.bumptech.glide.**

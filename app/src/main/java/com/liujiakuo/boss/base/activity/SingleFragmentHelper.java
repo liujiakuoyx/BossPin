@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.liujiakuo.boss.biz.login.RegisterFragment;
+
 /**
  * Created by 佳阔 on 2019/2/8.
  * 单一fragment启动类
@@ -22,6 +24,14 @@ public class SingleFragmentHelper {
         Intent intent = new Intent(context, SingleFragmentActivity.class);
         putSingleBundle(bundle, intent, fragmentName, fragmentTag);
         context.startActivity(intent);
+    }
+
+    /**
+     * 注册页面
+     */
+    public static void startReisterFragment(Context context) {
+        startSingleFragment(context, RegisterFragment.class.getName(),
+                RegisterFragment.class.getSimpleName(), new Bundle());
     }
 
     private static void putSingleBundle(Bundle bundle, Intent intent, String fragmentName, String fragmentTag) {

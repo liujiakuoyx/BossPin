@@ -17,6 +17,9 @@ public class RecyclerItemClickListener extends RecyclerView.SimpleOnItemTouchLis
                 new GestureDetector.SimpleOnGestureListener() {
                     @Override
                     public boolean onSingleTapUp(MotionEvent e) {
+                        if (recyclerView == null) {
+                            return false;
+                        }
                         View childView = recyclerView.findChildViewUnder(e.getX(), e.getY());
                         RecyclerView.ViewHolder viewHolder = recyclerView.getChildViewHolder(childView);
                         if (viewHolder instanceof BaseViewHolder) {
@@ -43,11 +46,11 @@ public class RecyclerItemClickListener extends RecyclerView.SimpleOnItemTouchLis
         return false;
     }
 
-    public void onItemClick(BaseViewHolder holder){
+    public void onItemClick(BaseViewHolder holder) {
 
     }
 
-    public void onItemLongClick(BaseViewHolder holder){
+    public void onItemLongClick(BaseViewHolder holder) {
 
     }
 }

@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.google.gson.reflect.TypeToken;
 import com.liujiakuo.boss.R;
 import com.liujiakuo.boss.base.BaseFragment;
+import com.liujiakuo.boss.base.activity.SingleFragmentHelper;
 import com.liujiakuo.boss.base.http.RequestDefine;
 import com.liujiakuo.boss.base.http.response.DataResponse;
 import com.liujiakuo.boss.config.ConfigData;
@@ -59,7 +60,7 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
      * 注册
      */
     private void doRegister() {
-
+        SingleFragmentHelper.startReisterFragment(getContext());
     }
 
     /**

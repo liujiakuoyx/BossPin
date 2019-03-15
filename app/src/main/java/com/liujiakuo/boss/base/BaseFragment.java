@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.liujiakuo.boss.base.activity.BaseActivity;
 import com.liujiakuo.core.http.HttpClient;
@@ -31,7 +32,7 @@ public abstract class BaseFragment extends Fragment {
         initViews(view);
     }
 
-    protected void initViews(View view){
+    protected void initViews(View view) {
 
     }
 
@@ -48,5 +49,9 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroy();
         //关闭没有完成的网络请求，防止内存溢出
         HttpClient.cancelByTag(this);
+    }
+
+    protected void showToast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }
