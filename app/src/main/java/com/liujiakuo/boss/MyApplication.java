@@ -2,7 +2,7 @@ package com.liujiakuo.boss;
 
 import android.support.multidex.MultiDexApplication;
 
-import com.liujiakuo.boss.utils.SPConfig;
+import com.liujiakuo.core.config.ConfigManager;
 import com.liujiakuo.core.http.HttpClient;
 import com.liujiakuo.core.task.CoreThreadPool;
 
@@ -25,7 +25,7 @@ public class MyApplication extends MultiDexApplication {
         CoreThreadPool.initThreadPool();
         //初始化okHttp
         HttpClient.initOkHttp(this);
-        //初始化sp
-        SPConfig.init(this);
+        //初始化ContentProvider的SP（跨进程共享数据）
+        ConfigManager.init(this);
     }
 }

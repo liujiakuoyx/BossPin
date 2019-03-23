@@ -1,7 +1,7 @@
 package com.liujiakuo.boss.config;
 
 import com.liujiakuo.boss.biz.login.UserBean;
-import com.liujiakuo.boss.utils.SPConfig;
+import com.liujiakuo.core.config.ConfigManager;
 
 /**
  * Created by 佳阔 on 2019/3/11.
@@ -17,17 +17,17 @@ public class ConfigData {
         if (userInfo == null) {
             return;
         }
-        SPConfig.putBoolean(SP_CONFIG_KEY_USER_LOGIN_STATUS, true);
-        SPConfig.putString(SP_CONFIG_KEY_USER_KEY, userInfo.getKey());
-        SPConfig.putString(SP_CONFIG_KEY_USER_NAME, userInfo.getNick());
-        SPConfig.putInt(SP_CONFIG_KEY_USER_TYPE, userInfo.getType());
+        ConfigManager.save(SP_CONFIG_KEY_USER_LOGIN_STATUS, true);
+        ConfigManager.save(SP_CONFIG_KEY_USER_KEY, userInfo.getKey());
+        ConfigManager.save(SP_CONFIG_KEY_USER_NAME, userInfo.getNick());
+        ConfigManager.save(SP_CONFIG_KEY_USER_TYPE, userInfo.getType());
     }
 
     public static void logout() {
-        SPConfig.putBoolean(SP_CONFIG_KEY_USER_LOGIN_STATUS, false);
+        ConfigManager.save(SP_CONFIG_KEY_USER_LOGIN_STATUS, false);
     }
 
     public static boolean isLogin() {
-        return SPConfig.getBoolean(SP_CONFIG_KEY_USER_LOGIN_STATUS);
+        return ConfigManager.getBoolean(SP_CONFIG_KEY_USER_LOGIN_STATUS,false);
     }
 }
