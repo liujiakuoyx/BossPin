@@ -3,8 +3,8 @@
     package="com.liujiakuo.boss">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -26,6 +26,10 @@
         <activity
             android:name=".base.activity.SingleFragmentActivity"
             android:theme="@style/ActivityTheme" />
+
+        <provider
+            android:name="com.liujiakuo.core.config.SPContentProvider"
+            android:authorities="com.liujiakuo.core.config.sphelper" />
     </application>
 
 </manifest>
