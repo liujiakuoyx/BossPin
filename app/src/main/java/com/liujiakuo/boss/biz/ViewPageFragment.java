@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.liujiakuo.boss.R;
 import com.liujiakuo.boss.base.BaseFragment;
 import com.liujiakuo.boss.biz.position.PositionListFragment;
+import com.liujiakuo.boss.biz.profile.ProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class ViewPageFragment extends BaseFragment implements View.OnClickListen
         fragments.add(new PositionListFragment());
         fragments.add(new PositionListFragment());
         fragments.add(new PositionListFragment());
-        fragments.add(new PositionListFragment());
+        fragments.add(new ProfileFragment());
         mPagerAdapter.setFragments(fragments);
         mViewPager.setAdapter(mPagerAdapter);
         mPagerAdapter.notifyDataSetChanged();

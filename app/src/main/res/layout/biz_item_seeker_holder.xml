@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/common_list_padding">
+
+    <TextView
+        android:id="@+id/position_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Position Name"
+        android:textColor="#383838"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/seeker_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="名字"
+            android:textColor="#383838"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/seeker_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男"
+            android:textColor="#383838"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/seeker_education"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/text_tag_back"
+            android:padding="3dp"
+            android:text="本科"
+            android:textColor="#383838"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/seeker_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/text_tag_back"
+            android:padding="3dp"
+            android:text="北京"
+            android:textColor="#383838"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/seeker_contact_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:text="15369291630"
+        android:textColor="#383838"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:id="@+id/position_poster_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/seeker_head"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/seeker_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="boss"
+            android:textColor="#969696"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import com.liujiakuo.boss.base.list.BasePageListAdapter;
 import com.liujiakuo.boss.base.list.BaseViewHolder;
 import com.liujiakuo.boss.base.list.HolderItemTypeFactory;
-import com.liujiakuo.boss.holder.PositionHolder;
 import com.liujiakuo.boss.holder.RecyclerViewItemType;
 
 /**

@@ -3,6 +3,7 @@ package com.liujiakuo.boss.base.list;
 import android.view.ViewGroup;
 
 import com.liujiakuo.boss.R;
+import com.liujiakuo.boss.holder.JobHunterHolder;
 import com.liujiakuo.boss.holder.PositionHolder;
 import com.liujiakuo.boss.holder.RecyclerViewItemType;
 import com.liujiakuo.boss.utils.TextUtils;
@@ -39,6 +40,10 @@ public class HolderItemTypeFactory {
             case RecyclerViewItemType.ITEM_TYPE_JOB:
                 //工作列表holder
                 viewHolder = new PositionHolder(R.layout.biz_item_position_holder, parent);
+                break;
+            case RecyclerViewItemType.ITEM_TYPE_SEEKER:
+                //工作列表holder
+                viewHolder = new JobHunterHolder(R.layout.biz_item_seeker_holder, parent);
                 break;
             case RecyclerViewItemType.ITEM_TYPE_COMPANY:
                 break;

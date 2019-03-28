@@ -15,4 +15,5 @@ public class RecyclerViewItemType {
 
     public static final int ITEM_TYPE_JOB = 100;//职位类型
     public static final int ITEM_TYPE_COMPANY = 101;//公司类型
+    public static final int ITEM_TYPE_SEEKER = 200;//求职卡片类型
 }
